@@ -69,10 +69,12 @@ class ImageWindow:
         self.canvas.pack(fill=tk.BOTH, expand=True)
 
     def create_buttons(self):
-        borderless_button = tk.Button(self.window, text="◼", command=self.borderless, width=2, height=1)
+        borderless_button = tk.Button(self.window, text="📌", command=self.borderless, width=2, height=1)
         borderless_button.place(x=0, y=0)
         
         self.right_click_menu = tk.Menu(self.window, tearoff=0)
+        self.right_click_menu.add_command(label="📌 Always On Top", command=self.borderless) 
+        self.right_click_menu.add_separator() 
         self.right_click_menu.add_command(label="📸 Open", command=self.open_image_with_browser) 
         self.right_click_menu.add_command(label="📄 Copy to ClipBoard", command=self.copy_image_to_clipboard)
         # self.right_click_menu.add_command(label="💾 Save Fast", command=self.contax_save_fast)
