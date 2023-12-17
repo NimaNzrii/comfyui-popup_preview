@@ -4,8 +4,8 @@ try:
     import torchvision.transforms.functional as tf
     from PIL import ImageFile
 except ImportError:
-    subprocess.run(["./python_embeded/python.exe", "-m", "pip", "install", "pillow"])
-    subprocess.run(["./python_embeded/python.exe", "-m", "pip", "install", "torch torchvision"])
+    subprocess.run(["python.exe", "-m", "pip", "install", "pillow"])
+    subprocess.run(["python.exe", "-m", "pip", "install", "torch torchvision"])
 
 
 
