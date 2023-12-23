@@ -1,13 +1,20 @@
 import importlib
+import psutil
+import os
 import subprocess
+
+os.chdir(r".\ComfyUI\custom_nodes\comfyui-popup_preview\window")
+Python_patch = os.path.abspath(os.path.join(os.getcwd(), r"venv\Scripts\python.exe"))
+if not os.path.exists(r".\venv"):
+    os.system(r".\setup.bat")
+
+
 try:
     import torchvision.transforms.functional as tf
     from PIL import ImageFile
 except ImportError:
     subprocess.run(["python.exe", "-m", "pip", "install", "pillow"])
     subprocess.run(["python.exe", "-m", "pip", "install", "torch torchvision"])
-
-
 
 node_list = [ 
     "popup"

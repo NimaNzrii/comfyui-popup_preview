@@ -1,24 +1,18 @@
-from PIL import ImageFile
+import psutil
+import os
+from PIL import Image
 import torch
 import torchvision.transforms.functional as tf
 from pathlib import Path
 import subprocess
 import tempfile
-
 import time
-
-last_execution_time = 0 
+import numpy as np
 
 def execute_after_save():
-    global last_execution_time 
-    current_time = time.time()
-
-    # بررسی زمان گذشته از آخرین اجرا
-    if current_time - last_execution_time >= 5:
-        subprocess.Popen("./ComfyUI/custom_nodes/comfyui-popup_preview/window/launcher.exe")
-        last_execution_time = current_time 
-
-ImageFile.LOAD_TRUNCATED_IMAGES = True
+    Python_patch = os.path.abspath(os.path.join(os.getcwd(), r"venv\Scripts\python.exe"))
+    if not [p.info for p in psutil.process_iter(['pid', 'name', 'exe']) if p.info['exe'] == Python_patch]:
+        subprocess.Popen([Python_patch, 'popup_window.py'])
 
 def save_image(img: torch.Tensor, subpath):
     path = subpath

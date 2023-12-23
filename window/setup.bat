@@ -15,5 +15,4 @@ call .\venv\Scripts\activate.bat
 echo Installing requirements...
 pip install -r requirements.txt
 
-echo installed successfully, Launching. . .
-call venv\Scripts\python.exe popup_window.py
+echo installed successfully
