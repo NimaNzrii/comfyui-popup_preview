@@ -1,12 +1,15 @@
 import importlib
-import psutil
 import os
 import subprocess
+import folder_paths
 
-os.chdir(r".\ComfyUI\custom_nodes\comfyui-popup_preview\window")
-Python_patch = os.path.abspath(os.path.join(os.getcwd(), r"venv\Scripts\python.exe"))
+
+
+node_path = os.path.join(folder_paths.get_folder_paths("custom_nodes")[0], "comfyui-popup_preview")
+os.chdir(os.path.join(node_path, "window"))
 if not os.path.exists(r".\venv"):
     os.system(r".\setup.bat")
+
 
 
 try:
