@@ -7,16 +7,12 @@ import folder_paths
 import os
 
 default_directory = os.getcwd()
-print("JJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ", default_directory)
-
 node_path = os.path.join(folder_paths.get_folder_paths("custom_nodes")[0], "comfyui-popup_preview")
 os.chdir(os.path.join(node_path, "window"))
 if not os.path.exists(r".\venv"):
     os.system(r".\setup.bat")
-    
 os.chdir(default_directory)
 
-print("oooooooooooooooooooooooooooooooooooooooooooooooooo", os.getcwd())
 
 try:
     import torchvision.transforms.functional as tf
