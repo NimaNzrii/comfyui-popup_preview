@@ -4,15 +4,20 @@ from PIL import Image
 import torch
 import torchvision.transforms.functional as tf
 from pathlib import Path
-import subprocess
 import tempfile
-import time
-import numpy as np
+import folder_paths
 
-def execute_after_save():
-    Python_patch = os.path.abspath(os.path.join(os.getcwd(), r"venv\Scripts\python.exe"))
-    if not [p.info for p in psutil.process_iter(['pid', 'name', 'exe']) if p.info['exe'] == Python_patch]:
-        subprocess.Popen([Python_patch, 'popup_window.py'])
+node_path = os.path.join(folder_paths.get_folder_paths("custom_nodes")[0], "comfyui-popup_preview")
+popup_window_path = os.path.join(node_path, 'window', 'popup_window.py')
+python_path = os.path.join(node_path, 'window', 'venv', 'Scripts', 'python.exe')
+
+def openWindow():
+    Python_patch = os.path.abspath(python_path)
+    python_running = any(p.info['exe'] == Python_patch for p in psutil.process_iter(['pid', 'name', 'exe']))
+    
+    if not python_running:
+        import subprocess
+        subprocess.Popen([Python_patch, popup_window_path])
 
 def save_image(img: torch.Tensor, subpath):
     path = subpath
@@ -27,7 +32,7 @@ def save_image(img: torch.Tensor, subpath):
     img = tf.to_pil_image(img)
     
     img.save(path, format="PNG", compress_level=1)
-    execute_after_save()
+    openWindow()
     
 
 

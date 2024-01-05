@@ -25,7 +25,7 @@ class ImageWindow:
         self.window.geometry(f"+50+65")
 
 
-        self.window.iconphoto(False, ImageTk.PhotoImage(Image.open("icon.ico")))
+
 
 
         self.window.bind("<Configure>", self.on_window_configure)
