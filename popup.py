@@ -12,12 +12,16 @@ popup_window_path = os.path.join(node_path, 'window', 'popup_window.py')
 python_path = os.path.join(node_path, 'window', 'venv', 'Scripts', 'python.exe')
 
 def openWindow():
-    Python_patch = os.path.abspath(python_path)
-    python_running = any(p.info['exe'] == Python_patch for p in psutil.process_iter(['pid', 'name', 'exe']))
-    
-    if not python_running:
-        import subprocess
-        subprocess.Popen([Python_patch, popup_window_path])
+    if os.path.exists( python_path ):
+        python_running = any(p.info['exe'] == python_path for p in psutil.process_iter(['pid', 'name', 'exe']))
+        if os.path.exists( popup_window_path ):
+            if not python_running:
+                import subprocess
+                subprocess.Popen([python_path, popup_window_path])
+        else:
+            print(f'popup window not exist on: {popup_window_path}')
+    else:
+        print(f'Python not exist on: {python_path} and this is popup window path {popup_window_path}')
 
 def save_image(img: torch.Tensor, subpath):
     path = subpath
